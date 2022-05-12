@@ -1,0 +1,14 @@
+{
+  "name": "uitestatplayground",
+  "version": "1.0.0",
+  "description": "UI Test Automation playground puzzle",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx cypress run"
+  },
+  "author": "e11d0",
+  "license": "MIT",
+  "devDependencies": {
+    "cypress": "^9.6.1"
+  }
+}
