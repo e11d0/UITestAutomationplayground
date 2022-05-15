@@ -1,6 +1,6 @@
 ///<reference types ='Cypress'/>
-///<reference types="cypress-xpath" />
 //importando a classe utpPuzzlePage que tem as funcoes
+import uitapPuzzlePage from "../pages/uitapPuzzlePage";
 import puzzlePage from "../pages/uitapPuzzlePage"
 
 describe('Puzzle solving', () => {
@@ -182,80 +182,67 @@ describe('Puzzle solving', () => {
         puzzlePage.homePage()
 
     })
-    it('CT014_Visibility', () => {
+    it('CT014_Sample App', () => {
 
-        cy.get('#overview > .container > :nth-child(4) > :nth-child(2) > h3 > a')
-            .contains('Sample App')
-            .click()
+        uitapPuzzlePage.clickHomePageElementsByText('Sample App');
 
-        cy.get('#loginstatus').contains('User logged out.')
+        cy.get('#loginstatus').contains('User logged out.');
 
         cy.get('input[name="UserName"]')
             .type('josin')
-            .should('have.value', 'josin')
+            .should('have.value', 'josin');
 
         cy.get('input[name="Password"]')
             .type('pwd')
-            .should('have.value', 'pwd')
+            .should('have.value', 'pwd');
 
-        cy.get('#login').click()
+        cy.get('#login').click();
 
-        cy.get('#loginstatus').contains('Welcome, josin!')
+        cy.get('#loginstatus').contains('Welcome, josin!');
 
-        //voltando para tela home
-        cy.get('#navbarSupportedContent > .navbar-nav > :nth-child(1) > .nav-link').click()
-        cy.url().should('equal', 'http://uitestingplayground.com/home')
+        puzzlePage.homePage();
     })
     it('CT015_Mouse_Over', () => {
 
-        cy.get('#overview > .container > :nth-child(4) > :nth-child(3) > h3 > a')
-            .contains('Mouse Over')
-            .click()
+        puzzlePage.clickHomePageElementsByText('Mouse Over')
 
-        cy.get('.container > :nth-child(7)')
+        cy.get('a[class="text-primary"][title="Click me"]')
             .contains('Click me')
             .click()
 
-        cy.get('.container > :nth-child(7)')
+        cy.get('.text-warning')
             .contains('Click me')
             .click()
 
-        cy.get(':nth-child(8) > p').contains('The link clicked 2 times.')
+        cy.get('body section div[class="container"] p').contains('The link clicked 2 times.')
 
-        //voltando para tela home
-        cy.get('#navbarSupportedContent > .navbar-nav > :nth-child(1) > .nav-link').click()
-        cy.url().should('equal', 'http://uitestingplayground.com/home')
+        puzzlePage.homePage()
 
     })
     it('CT016_Non-Breaking Space', () => {
 
-        cy.get('#overview > .container > :nth-child(4) > :nth-child(4) > h3 > a')
-            .contains('Non-Breaking Space')
-            .click()
+        puzzlePage.clickHomePageElementsByText('Non-Breaking Space');
 
-        cy.xpath('//div//button').click()
+        cy.get('button[class="btn btn-primary"][type="button"]');
 
-        //voltando para tela home
-        cy.get('#navbarSupportedContent > .navbar-nav > :nth-child(1) > .nav-link').click()
-        cy.url().should('equal', 'http://uitestingplayground.com/home')
+        puzzlePage.homePage();
+
     })
     it('CT017_Overlapped Element', () => {
 
-        cy.get('#overview > .container > :nth-child(5) > :nth-child(1) > h3 > a')
-            .contains('Overlapped Element')
-            .click()
+        puzzlePage.clickHomePageElementsByText('Overlapped Element');
 
         cy.get('#id')
             .type('666')
+            .should('have.value', '666')
 
         cy.get('[style="overflow-y: scroll; height:100px;"]').scrollTo(0, 100)
 
         cy.get('#name')
             .type('huenildo')
+            .should('have.value', 'huenildo')
 
 
-        //voltando para tela home
-        cy.get('#navbarSupportedContent > .navbar-nav > :nth-child(1) > .nav-link').click()
-        cy.url().should('equal', 'http://uitestingplayground.com/home')
+        puzzlePage.homePage();
     })
 })
